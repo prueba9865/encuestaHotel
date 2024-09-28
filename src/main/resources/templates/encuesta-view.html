@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle de Encuesta</title>
+  <!-- Vinculación de Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Detalles de la Encuesta</h2> <!-- Título descriptivo para la página -->
+
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text"><strong>Nombre:</strong> <span th:text="${encuesta.nombre}"></span></p>
+      <p class="card-text"><strong>Apellidos:</strong> <span th:text="${encuesta.apellidos}"></span></p>
+      <p class="card-text"><strong>Email:</strong> <span th:text="${encuesta.email}"></span></p>
+      <p class="card-text"><strong>Edad:</strong> <span th:text="${encuesta.edad}"></span></p>
+      <p class="card-text"><strong>Teléfono:</strong> <span th:text="${encuesta.telefono}"></span></p>
+      <p class="card-text"><strong>Fecha Inicio Estancia:</strong> <span th:text="${encuesta.fechaInicioEstancia}"></span></p>
+      <p class="card-text"><strong>Motivo de Visita:</strong> <span th:text="${encuesta.motivoVisita}"></span></p>
+      <p class="card-text"><strong>Servicios Utilizados:</strong> <span th:text="${encuesta.serviciosUtilizados}"></span></p>
+      <p class="card-text"><strong>Satisfacción:</strong> <span th:text="${encuesta.satisfaccion}"></span></p>
+      <p class="card-text"><strong>Comentarios:</strong> <span th:text="${encuesta.comentarios}"></span></p>
+    </div>
+  </div>
+
+  <!-- Enlace para volver al inicio -->
+  <div class="text-center mt-4">
+    <a class="btn btn-primary" th:href="@{/admin/encuestas}">Volver al inicio</a>
+  </div>
+</div>
+
+<!-- Vinculación de Bootstrap JS y dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

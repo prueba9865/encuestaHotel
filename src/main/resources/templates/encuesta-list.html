@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Encuestas</title>
+    <!-- Vinculación de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Lista de Encuestas</h2>
+
+    <!-- Formulario para filtrar encuestas -->
+    <form th:action="@{/admin/encuestas/filtrar}" method="GET" class="mb-4">
+        <div class="input-group">
+            <select name="satisfaccion" class="form-control" aria-label="Filtrar por nivel de satisfacción">
+                <option value="" selected>Seleccione nivel de satisfacción...</option>
+                <option th:each="nivel : ${nivelesSatisfaccion}" th:value="${nivel}" th:text="${nivel}"></option>
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Filtrar</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div id="encuestas">
+        <p th:if="${#lists.isEmpty(encuestas)}" class="alert alert-warning">No hay encuestas.</p>
+
+        <h3>Encuestas Enviadas</h3>
+        <!-- Mostrar el número de encuestas -->
+        <p th:if="${!#lists.isEmpty(encuestas)}">
+            Total de encuestas enviadas: <span class="font-weight-bold" th:text="${numeroEncuestas}"></span>
+        </p>
+
+        <h3>Promedio Edades</h3>
+        <!-- Mostrar el promedio de edades -->
+        <p th:if="${!#lists.isEmpty(encuestas)}">
+            El promedio de las edades es: <span class="font-weight-bold" th:text="${promedioEdad}"></span>
+        </p>
+
+        <!-- Desglose de niveles de satisfacción -->
+        <h3>Desglose de Niveles de Satisfacción</h3>
+        <ul class="list-group mb-4">
+            <li th:each="entry : ${desgloseSatisfaccion}" class="list-group-item">
+                Nivel <span th:text="${entry.key}"></span>: <span th:text="${entry.value}"></span>%
+            </li>
+        </ul>
+
+        <h3>Información Sobre las Encuestas</h3>
+        <ul class="list-group">
+            <li th:each="encuesta : ${encuestas}" class="list-group-item">
+                <div>
+                    <strong th:text="${encuesta.nombre}"></strong>
+                    <br>
+                    <span th:text="${encuesta.fechaInicioEstancia}"></span>
+                    <br>
+                    Satisfacción: <span th:text="${encuesta.satisfaccion}"></span>
+                    <br>
+                    Edad: <span th:text="${encuesta.edad}"></span> <!-- Asegúrate de que esto esté definido -->
+                    <br>
+                    <a class="btn btn-info btn-sm" th:href="@{/admin/encuestas/view/{id}(id=${encuesta.id})}">Ver</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/admin/encuestas/del/{id}(id=${encuesta.id})}">Borrar</a>
+                    <a class="btn btn-warning btn-sm" th:href="@{/admin/encuestas/edit/{id}(id=${encuesta.id})}">Editar</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Vinculación de Bootstrap JS y dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
